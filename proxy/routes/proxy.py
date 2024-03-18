@@ -13,7 +13,8 @@ def return_proxies(
     amount: int = 10, 
     location: list[str] = None, 
     reliability: float = 0.5,
-    site: str = None
+    site: str = None,
+    font: str = None
     ) -> list[str]:
     """
     Retorna uma lista de proxies no formato string com as configurações desejadas.
