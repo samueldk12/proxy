@@ -22,4 +22,3 @@ class ProxyUpdateRequest(BaseModel):
     proxy: str
     status: str
     location: str
-

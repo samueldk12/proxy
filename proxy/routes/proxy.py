@@ -1,37 +1,33 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, Query
+
+from proxy.serializers.proxy import ProxyCreateRequest, ProxyCreateResponse, ProxyResponse, ProxyUpdateRequest, ProxyUpdateResponse
+
+proxy_router = APIRouter()
 
 
-from proxy.app import app
-
-proxy_app = APIRouter('/')
-
-proxy_app.add_api_route(app)
-
-
-@proxy_app.get('/proxy', status_code=200)
-def return_proxies(
-    amount: int = 10, 
-    location: list[str] = None, 
-    reliability: float = 0.5,
-    site: str = None,
-    font: str = None
-    ) -> list[str]:
+@proxy_router.get('/proxy', status_code=200)
+async def return_proxies(
+        amount: int | None = 10, 
+        location: list[str] | None = None, 
+        reliability: float | None = 0.5,
+        site: str | None = None,
+        font: str | None = None
+    ) -> ProxyResponse:
     """
     Retorna uma lista de proxies no formato string com as configurações desejadas.
-
-    :param amount: A quantidade de proxies a serem retornados
-    :type amount: int
-    :param location: A localização dos proxies desejados
-    :type location: list[str]
-    :param reliability: A confiabilidade mínima dos proxies desejados
-    :type reliability: float
-    :param site: Site para qual irá fazer request
-    :type site: str
-    :return: Uma lista de proxies com as configurações desejadas, caso não passe parametro retorna as com maior reliability.
-    :rtype: list[str]
     """
     ...
 
-@proxy_app.put("/proxy-update", status_code=201)
-def update_proxy() -> None | object:
+@proxy_router.put("/proxy-update", status_code=201)
+async def update_proxy(request: ProxyUpdateRequest) -> ProxyUpdateResponse:
+    """
+    Atualiza as informações de proxy, com intuito de alterar a confiabilidade, de cada proxy
+    """
+    ...
+
+@proxy_router.post('/proxy-create', status_code=201)
+async def create_proxy(request: ProxyCreateRequest) -> ProxyCreateResponse:
+    """
+    Cria uma nova proxy.
+    """
     ...
