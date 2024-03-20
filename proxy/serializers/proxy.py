@@ -20,5 +20,5 @@ class ProxyUpdateResponse(BaseModel):
 class ProxyUpdateRequest(BaseModel):
     site: str
     proxy: str
-    status: str
+    status: int
     location: str
